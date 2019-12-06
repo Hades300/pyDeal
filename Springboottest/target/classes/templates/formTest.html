@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FormTester</title>
+    <script src="/static/js/myJs.js" type="text/javascript"></script>
+</head>
+<body>
+<h1>Register</h1>
+<p id="id_info" hidden="hidden"></p>
+<form id="id_form" method="post">
+    <label>UserName<input type="text" name="username"/></label>
+    <label>Password<input type="password" name="password"></label>
+    <input type="button" value="RegisterByAJAX" onclick="ajaxRegister()"/>
+</form>
+<form id="id_form2" method="post" action="/form2">
+    <label>UserName<input type="text" name="username"/></label>
+    <label>Password<input type="password" name="password"></label>
+    <input type="submit" value="RegisterByFORM"/>
+</form>
+<form id="id_form3" method="post" action="/form3">
+    <label>UserName<input type="text" name="username"/></label>
+    <label>Password<input type="password" name="password"></label>
+    <input type="submit" value="testThymeleaf"/>
+</form>
+</body>
+</html>
