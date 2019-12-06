@@ -22,7 +22,7 @@ public class HelloWorldController {
         this.testMapper = testMapper;
     }
     private TestMapper testMapper;
-
+    /*
     //Thymeleaf模板引擎测试
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String dynamicPageDemo(){
@@ -65,14 +65,16 @@ public class HelloWorldController {
         modelAndView.addObject("password", user.getPassword());
         return modelAndView;
     }
-
-    /*
-    //静态页面测试
-    //如果想要用静态页面，请在application.properties中注释thymeleaf相关内容
+    */
     @RequestMapping(value="/", method = RequestMethod.GET)
     public String staticPageDemo(){
         return "hello";
     }
-    */
+
+    @RequestMapping(value="/form", method = RequestMethod.POST)
+    @ResponseBody
+    public User staticPageForm(User user){
+        return user;
+    }
 
 }
