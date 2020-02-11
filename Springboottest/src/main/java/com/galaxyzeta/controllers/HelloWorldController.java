@@ -174,14 +174,14 @@ public class HelloWorldController {
     @PostMapping(value="/deal")
     @ResponseBody
     public Status postDeal(HttpServletRequest request){
-        String username = request.getParameter("catId");
-        String password = request.getParameter("");
-        String sex = request.getParameter("sex");
-        String stuid = request.getParameter("stuid");
+        String catid = request.getParameter("catid");
+        String title = request.getParameter("title");
+        String context = request.getParameter("context");
+        String ddl = request.getParameter("ddl");
         Status status = new Status(200, "[INFO]OK!");
         status.setAvatar("https://image.slidesharecdn.com/bramsey-phptek-2009-http-090522162437-phpapp02/95/making-the-most-of-http-in-your-apps-34-728.jpg?cb=1243035651");
         try{
-            if(username.equals("") || sex.equals("") || password.equals("") || stuid.equals("")){
+            if(catid.equals("") || title.equals("") || context.equals("") || ddl.equals("") ){
                 status.setStatus(404);
                 status.setMessage("[Error]缺少字段");
                 status.setAvatar("https://cn.bing.com/th?id=OIP.r_doUPmUg2hlEx8ZDlbnEgHaEL&pid=Api&rs=1");
