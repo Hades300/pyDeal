@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.findcup.pydeal.dao.DealDao">
+    <resultMap id="DealResult" type="Deal">
+        <id property="pid" column="pid" jdbcType="BIGINT"></id>
+        <result property="title" column="title" jdbcType="VARCHAR"></result>
+        <result property="context" column="context" jdbcType="VARCHAR"></result>
+        <result property="createAt" column="createat" jdbcType="TIMESTAMP"></result>
+        <result property="ddl" column="ddl" jdbcType="TIMESTAMP"></result>
+        <result property="state" column="state" jdbcType="VARCHAR"></result>
+        <result property="terminatorId" column="terminatorid" jdbcType="BIGINT"></result>
+        <result property="uid" column="uid" jdbcType="BIGINT"></result>
+    </resultMap>
+
+    <select id="getDeals" parameterType="Map" resultMap="DealResult">
+        select * from deal
+        where terminatorid=0
+        <if test="start!=null and limit!=null">
+            limit #{start},#{limit}
+        </if>
+    </select>
+
+    <select id="getDealNum" resultType="int" >
+        select count(1) from deal
+        where terminatorid=0
+    </select>
+
+
+    <insert id="insertDeal" parameterType="Deal">
+        insert into deal (`title`,`context`,`uid`,`ddl`) values (#{title},#{context},#{uid},#{ddl})
+    </insert>
+
+    <update id="updateDeal" parameterType="Deal">
+        update deal set title=#{title} , context = #{context} where pid=#{pid}
+    </update>
+
+    <select id="findDeal" parameterType="Deal" resultType="int">
+        select count(1) from deal where pid=#{pid}
+    </select>
+
+</mapper>
+

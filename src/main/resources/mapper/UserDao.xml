@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.findcup.pydeal.dao.UserDao">
+
+        <resultMap id="UserResult" type="User">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="token" column="token" jdbcType="VARCHAR"/>
+        </resultMap>
+
+        <select id="findUsers" parameterType="Map" resultMap="UserResult">
+        select uid,username,gender,avatar from user
+        order by uid desc
+        <if test="start!=null and limit!=null">
+        limit #{start},#{limit}
+        </if>
+        </select>
+
+        <select id="getTotalUser" parameterType="Map" resultType="int">
+        select count(*) from user
+        </select>
+
+        <select id="getUserByUserNameAndPassword" parameterType="User" resultMap="UserResult">
+        select  uid,username,password,avatar from user where username=#{username} and password=#{password}
+        limit 1
+        </select>
+
+        <select id="getUserByToken" parameterType="User" resultMap="UserResult">
+        select uid,username,password,token from user where token = #{token}
+        </select>
+
+        <select id="getUserById" resultMap="UserResult">
+                select uid,username,password,token  from user where uid=#{id}
+        </select>
+
+        <select id="getUserByUserName" resultMap="UserResult" parameterType="User">
+                select uid,username,password,token  from user where username=#{username}
+        </select>
+
+        <insert id="addUser" parameterType="User">
+                insert into user (`username`,`password`,`gender`,`email`) values (#{username},#{password},#{gender},#{email})
+        </insert>
+
+        <update id="updateUserToken">
+                update user set token=#{token} where uid=#{uid}
+        </update>
+
+        <delete id="deleteUser">
+                delete user where uid=#{uid}
+        </delete>
+
+        </mapper>
