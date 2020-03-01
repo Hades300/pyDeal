@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service("UserService")
-
 public class UserServiceImpl implements UserService {
 
     @Autowired(required =false)
@@ -28,14 +27,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateTokenAndLogin(String userName, String password) {
-        User User = userDao.getUserByUserNameAndPassword(userName, MD5Util.MD5Encode(password, "UTF-8"));
-        if (User != null) {
+        User user = userDao.getUserByUserNameAndPassword(userName, MD5Util.MD5Encode(password, "UTF-8"));
+        System.out.println(user);
+        if (user != null) {
             //登录后即执行修改token的操作
-            String token = getNewToken(System.currentTimeMillis() + "", User.getUid());
-            if (userDao.updateUserToken(User.getUid(), token) > 0) {
+            String token = getNewToken(System.currentTimeMillis() + "", user.getUid());
+            if (userDao.updateUserToken(user.getUid(), token) > 0) {
                 //返回数据时带上token
-                User.setToken(token);
-                return User;
+                user.setToken(token);
+                return user;
             }
         }
         return null;

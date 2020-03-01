@@ -31,3 +31,9 @@
     - /deals/add
     - /deals/delete
 - 数据库部署在我的学生机中，具体信息私戳
+
+**2020 3-1 更新 by @Hades300 and @Galaxyzeta**
+- 数据库字段增加，查询语句修改
+- 引入websocket广播聊天demo
+- 修复一个越权操作判断的逻辑错误
+- 修复 updateUserPassword 方法没有对应 sql mapping 的错误

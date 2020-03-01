@@ -41,6 +41,16 @@ public class User implements Serializable {
      */
     private String avatar;
 
+    private String nickname;
+
+    private String school;
+
+    private long studentId;
+
+    private String contact;
+
+    private String profession;
+
     public long getUid() {
         return uid;
     }
@@ -82,7 +92,7 @@ public class User implements Serializable {
     }
 
     public String getToken() {
-        return token;
+        return this.token;
     }
 
     public void setToken(String token) {
@@ -95,5 +105,50 @@ public class User implements Serializable {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getNickname() {
+        return this.nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getContact() {
+        return this.contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getSchool() {
+        return this.school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public long getStudentId() {
+        return this.studentId;
+    }
+
+    public void setStudentId(long studentId) {
+        this.studentId = studentId;
+    }
+
+    public String getProfession() {
+        return this.profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    @Override
+    public String toString() {
+        return this.username+"||"+this.password+"||"+this.contact+"||"+this.email+"||"+this.gender+"||"+this.school+"||"+this.uid+"||"+this.profession;
     }
 }

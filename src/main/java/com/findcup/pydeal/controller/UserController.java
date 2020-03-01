@@ -35,7 +35,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result login(@RequestBody User user) {
-        Result result = ResultGenerator.genFailResult("登录失败");
+        Result result = ResultGenerator.genFailResult("登陆失败");
         if (StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPassword())) {
             result.setMessage("请填写登录信息！");
         }
@@ -51,7 +51,8 @@ public class UserController {
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public Result save(@RequestBody User user) {
-        if (StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPassword())) {
+        System.out.println(user);
+        if (StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPassword()) || user.getStudentId() <= 0 || user.getGender() <= 0) {
             return ResultGenerator.genErrorResult(Constants.RESULT_CODE_PARAM_ERROR, "参数异常！");
         }
         User tempUser = userService.selectByUserName(user.getUsername());
@@ -73,10 +74,17 @@ public class UserController {
      */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public Result update(@RequestBody User user, @TokenToUser User loginUser) {
-        if (loginUser == null) {
+        String token = "";
+        try {
+            token = loginUser.getToken();
+        } catch(Exception e) {
+            return ResultGenerator.genFailResult("未登录！");
+        }
+        
+        if (StringUtils.isEmpty(loginUser) || StringUtils.isEmpty(token)) {
             return ResultGenerator.genErrorResult(Constants.RESULT_CODE_NOT_LOGIN, "未登录！");
         }
-        if (loginUser.getUid()==user.getUid()){
+        if (loginUser.getUid()!=user.getUid()){
             return ResultGenerator.genFailResult("越权操作");
         }
         if (StringUtils.isEmpty(user.getPassword())) {
@@ -97,10 +105,10 @@ public class UserController {
         }
     }
 
-
     @RequestMapping(value = "/debug",method = RequestMethod.POST)
-    public Result debug(@RequestBody User user){
-        System.out.println(user);
-        return ResultGenerator.genSuccessResult("Nice curl!");
+    public Result debug(){
+        Result res = ResultGenerator.genSuccessResult("OK");
+        res.setData(123);
+        return res;
     }
 }

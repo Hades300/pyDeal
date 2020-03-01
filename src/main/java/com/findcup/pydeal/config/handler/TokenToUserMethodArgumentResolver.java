@@ -32,12 +32,12 @@ public class TokenToUserMethodArgumentResolver implements HandlerMethodArgumentR
 
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         if (parameter.getParameterAnnotation(TokenToUser.class) instanceof TokenToUser) {
-            User User = null;
+            User user = null;
             String token = webRequest.getHeader("token");
             if (null != token && !"".equals(token) && token.length() == 32) {
-                User = userService.getUserByToken(token);
+                user = userService.getUserByToken(token);
             }
-            return User;
+            return user;
         }
         return null;
     }

@@ -23,7 +23,7 @@
         </select>
 
         <select id="getUserByUserNameAndPassword" parameterType="User" resultMap="UserResult">
-        select  uid,username,password,avatar from user where username=#{username} and password=#{password}
+        select uid,username,password,avatar from user where username=#{username} and password=#{password}
         limit 1
         </select>
 
@@ -40,15 +40,19 @@
         </select>
 
         <insert id="addUser" parameterType="User">
-                insert into user (`username`,`password`,`gender`,`email`) values (#{username},#{password},#{gender},#{email})
+                insert into user (`username`,`password`,`studentId`,`email`,`gender`,`nickname`,`contact`,`school`,`profession`) values (#{username},#{password},#{studentId},#{email},#{gender},#{nickname},#{contact},#{school},#{profession})
         </insert>
 
         <update id="updateUserToken">
                 update user set token=#{token} where uid=#{uid}
         </update>
 
+        <update id="updateUserPassword">
+                update user set password=#{password} where uid=#{uid}
+        </update>
+
         <delete id="deleteUser">
                 delete user where uid=#{uid}
         </delete>
 
-        </mapper>
+</mapper>
