@@ -50,4 +50,13 @@ public interface DealDao {
      */
     int findDeal(Deal item);
 
+    /**
+     * 获取deal状态
+     */
+    String getState(Deal item);
+
+
+    int UpdateDealState(Deal item);
+
+    int UpdateDealTerminator(Deal item);
 }

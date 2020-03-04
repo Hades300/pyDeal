@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -49,7 +50,7 @@ public class UserController {
     /**
      * 保存
      */
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public Result save(@RequestBody User user) {
         System.out.println(user);
         if (StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPassword()) || user.getStudentId() <= 0 || user.getGender() <= 0) {
@@ -83,9 +84,6 @@ public class UserController {
         
         if (StringUtils.isEmpty(loginUser) || StringUtils.isEmpty(token)) {
             return ResultGenerator.genErrorResult(Constants.RESULT_CODE_NOT_LOGIN, "未登录！");
-        }
-        if (loginUser.getUid()!=user.getUid()){
-            return ResultGenerator.genFailResult("越权操作");
         }
         if (StringUtils.isEmpty(user.getPassword())) {
             return ResultGenerator.genErrorResult(Constants.RESULT_CODE_PARAM_ERROR, "请输入密码！");

@@ -14,15 +14,15 @@ import com.findcup.pydeal.utils.PageUtil;
 //import org.apache.ibatis.javassist.bytecode.ConstantAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 //import sun.jvm.hotspot.debugger.Page;
 
 //import java.lang.reflect.GenericArrayType;
+import java.awt.event.ItemEvent;
+import java.util.Arrays;
 import java.util.Map;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/deals")
 public class DealController {
@@ -46,14 +46,23 @@ public class DealController {
         if (user == null) {
             return ResultGenerator.genFailResult("未登录");
         }
-        if (deal.getUid() != user.getUid()) {
-            return ResultGenerator.genFailResult("越权操作");
+        String state = deal.getState();
+        if (deal.getState()==""){
+            deal.setState(state);
+        }else{
+            deal.setState("pending");
         }
-        if (StringUtils.isEmpty(deal.getPid())) {
-            return ResultGenerator.genErrorResult(Constants.RESULT_CODE_PARAM_ERROR, "缺少必要字段");
+        String [] allowedState= {"overdue","pending","terminated"};
+        if (!Arrays.asList(allowedState).contains(deal.getState())){
+            return ResultGenerator.genFailResult("状态值不合法");
         }
-        if (dealService.UpdateDeal(deal) == 1) {
-            return ResultGenerator.genSuccessResult("更新成功");
+        deal.setUid(user.getUid());
+        // TODO:接取者也可将状态恢复至 pending --- BUG
+        if (dealService.UpdateDealTerminator(deal)!=1){
+            return ResultGenerator.genFailResult("接取失败");
+        }
+        if (dealService.UpdateDealState(deal) == 1) {
+            return ResultGenerator.genSuccessResult("更新状态成功");
         } else {
             return ResultGenerator.genErrorResult(Constants.RESULT_CODE_SERVER_ERROR, "更新失败");
         }

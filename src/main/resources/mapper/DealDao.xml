@@ -31,12 +31,21 @@
         insert into deal (`title`,`context`,`uid`,`ddl`) values (#{title},#{context},#{uid},#{ddl})
     </insert>
 
-    <update id="updateDeal" parameterType="Deal">
-        update deal set title=#{title} , context = #{context} where pid=#{pid}
+    <update id="UpdateDealState" parameterType="Deal">
+        update deal set state = #{state} where pid=#{pid}
     </update>
+
+    <update id="UpdateDealTerminator" parameterType="Deal">
+        update deal set terminatorid = #{terminatorId} where pid=#{pid}
+    </update>
+
 
     <select id="findDeal" parameterType="Deal" resultType="int">
         select count(1) from deal where pid=#{pid}
+    </select>
+
+    <select id="getState" parameterType="Deal" resultType="String">
+        select state from deal where pid=#{pid}
     </select>
 
 </mapper>

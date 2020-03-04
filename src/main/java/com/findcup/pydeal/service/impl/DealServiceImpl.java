@@ -36,13 +36,23 @@ public class DealServiceImpl implements DealService {
     }
 
     @Override
-    public int UpdateDeal(Deal item) {
-        int result = dealDao.updateDeal(item);
+    public int UpdateDealState(Deal item) {
+        int result = dealDao.UpdateDealState(item);
+        return result;
+    }
+    @Override
+    public int UpdateDealTerminator(Deal item){
+        int result = dealDao.UpdateDealTerminator(item);
         return result;
     }
 
     public int findDeal(Deal item) {
         int result= dealDao.findDeal(item);
         return result;
+    }
+
+    public String getState(Deal item){
+        String res = dealDao.getState(item);
+        return res;
     }
 }

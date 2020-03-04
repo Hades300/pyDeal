@@ -35,12 +35,18 @@ public interface DealService {
      * @param item
      * @return
      */
-    int UpdateDeal(Deal item);
+    int UpdateDealState(Deal item);
 
     /**
      * 查找Deal是否存在
-     * @param deal
+     * @param item
      * @return
      */
+
+    int UpdateDealTerminator(Deal item);
+
     int findDeal(Deal deal);
+
+
+    String getState(Deal deal);
 }
