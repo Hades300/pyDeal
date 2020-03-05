@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Spring Boot WebSocket Chat Application</title>
+    <link rel="stylesheet" href="/css/main2.css">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="left-bar">
+            <div class="nav"><p>Placeholder</p></div>
+            <div class="nav"><p>Placeholder</p></div>
+            <div class="nav"><p>Placeholder</p></div>
+            <div class="nav"><p>Placeholder</p></div>
+        </div>
+        <div class="main">
+            <div id="username-page">
+                <div class="com-menu white-card">
+                    <form action="#" class="form-group" id="usernameForm">
+                        <h2>Your Name Here:</h2>
+                        <span>
+                            <input id="name" type="text" name="" id="">
+                            <input class="btn primary" type="button" value="Start" onclick="connect();">
+                            <input class="btn danger" type="button" value="Quit">
+                        </span>
+                    </form>
+                    <p>Pick a topic here: </p>
+                    <div id="topic" class="pill-board">
+                        <span name="games" class="pill primary" onclick="selectTopic(this);">#Games</span>
+                        <span name="animes" class="pill primary" onclick="selectTopic(this);">#Animes</span>
+                        <span name="musics" class="pill primary" onclick="selectTopic(this);">#Musics</span>
+                    </div>
+                    <p>Or Create your own topic: </p>
+                    <form action="#" class="form-group" id="usernameForm">
+                        <span>
+                            <input id="custom-topic-input" type="text" name="" id="">
+                            <input class="btn primary" type="button" value="Set" onclick="setCustomTopic();">
+                        </span>
+                    </form>
+                </div>
+            </div>
+            <div id="chat-page" class="hidden">
+                <div class="com-menu-fluid white-card">
+                    <h2 id="chat-header">Connected</h2>
+                    <div class="connecting">
+                        Connecting...
+                    </div>
+                    <ul id="messageArea" class="chat-window">
+
+                    </ul>
+                    <div>
+                        <form action="#" class="form-group" id="messageForm">
+                            <span>
+                                <input type="text" id="message" placeholder="Type a message...">
+                                <input class="btn primary" type="button" value="SendMsg" onclick="sendMessage();">
+                                <input class="btn danger" type="button" value="Quit" onclick="quitChatting();">
+                            </span>
+                        </form>
+                    </div>
+                </div>
+                <div id="online-window" class="online-board white-card">
+                    <div class="header-bar primary">
+                        <span><h2 style="margin: 0; line-height: 4rem;">OnlineList</h2><span>
+                    </div>
+                    <ul id="online-list">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/main2.js"></script>
+</body>
+</html>

@@ -1,9 +1,12 @@
 package com.findcup.pydeal.config;
 
+import java.util.LinkedList;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.*;
-
 
 @Configuration
 @EnableWebSocketMessageBroker
@@ -19,8 +22,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.setApplicationDestinationPrefixes("/app");
 
         // Enables a simple in-memory broker
-        registry.enableSimpleBroker("/topic");
+        registry.enableSimpleBroker("/topic", "/user");
 
+        // Enable private chatting
+        registry.setUserDestinationPrefix("/user");
 
         // Use this for enabling a Full featured broker like RabbitMQ
         /*
@@ -30,5 +35,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 .setClientLogin("guest")
                 .setClientPasscode("guest");
         */
+    }
+
+    @Bean(name="userChannelMap")
+    public ConcurrentHashMap<String, LinkedList<String>> getUserChannelMap(){
+        return new ConcurrentHashMap<String, LinkedList<String>>();
     }
 }

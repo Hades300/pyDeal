@@ -4,6 +4,7 @@ public class ChatMessage {
     private MessageType type;
     private String content;
     private String sender;
+    private String channel;
 
     public enum MessageType {
         CHAT,
@@ -35,12 +36,21 @@ public class ChatMessage {
         this.sender = sender;
     }
 
+    public String getChannel() {
+        return this.channel;
+    }
+
+    public void setChannel(String channel){
+        this.channel = channel;
+    }
+
     @Override
     public String toString() {
         return "ChatMessage{" +
                 "type=" + type +
                 ", content='" + content + '\'' +
                 ", sender='" + sender + '\'' +
+                ", channel='" + channel + '\'' +
                 '}';
     }
 }

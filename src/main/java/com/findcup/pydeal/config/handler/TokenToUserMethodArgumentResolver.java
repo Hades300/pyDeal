@@ -34,6 +34,7 @@ public class TokenToUserMethodArgumentResolver implements HandlerMethodArgumentR
         if (parameter.getParameterAnnotation(TokenToUser.class) instanceof TokenToUser) {
             User user = null;
             String token = webRequest.getHeader("token");
+            System.out.println(token.length());
             if (null != token && !"".equals(token) && token.length() == 32) {
                 user = userService.getUserByToken(token);
             }

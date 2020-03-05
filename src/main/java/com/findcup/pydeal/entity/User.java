@@ -149,6 +149,13 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return this.username+"||"+this.password+"||"+this.contact+"||"+this.email+"||"+this.gender+"||"+this.school+"||"+this.uid+"||"+this.profession;
+        return new StringBuilder(this.username).append("||")
+        .append(this.password).append("||")
+        .append(this.contact).append("||")
+        .append(this.email).append("||")
+        .append(this.gender).append("||")
+        .append(this.school).append("||")
+        .append(this.uid).append("||")
+        .append(this.profession).toString();
     }
 }

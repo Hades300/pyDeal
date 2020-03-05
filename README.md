@@ -37,3 +37,7 @@
 - 引入websocket广播聊天demo
 - 修复一个越权操作判断的逻辑错误
 - 修复 updateUserPassword 方法没有对应 sql mapping 的错误
+
+**2020 3-5 更新 by @Galaxyzeta**
+- 聊天室重写，能支持广播聊天、点对点聊天、话题选择/创建
+- 因聊天室重写，部分聊天室相关后端代码有较大改动

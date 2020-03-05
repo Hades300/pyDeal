@@ -82,6 +82,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByToken(String userToken) {
+        System.out.println(userToken);
         return userDao.getUserByToken(userToken);
     }
 }
